@@ -1,9 +1,13 @@
+import React from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import dynamic from 'next/dynamic'
 
-const inter = Inter({ subsets: ['latin'] })
+import { StepsProvider } from '../contexts/steps/step.context'
+import { PlansProvider } from '../contexts/plans/plan.context'
+import StepContent from '../components/StepContent'
+
+const SideBar = dynamic(() => import('../components/SideBar'))
+const BottomBar = dynamic(() => import('../components/BottomBar'))
 
 export default function Home() {
   return (
@@ -19,47 +23,34 @@ export default function Home() {
           href="/images/favicon-32x32.png"
         />
       </Head>
-      <main className={styles.main}>
-        {/* <!-- Sidebar start --> */}
-        Step 1 Your info Step 2 Select plan Step 3 Add-ons Step 4 Summary
-        {/* <!-- Sidebar end --> */}
-        {/* <!-- Step 1 start --> */}
-        Personal info Please provide your name, email address, and phone number.
-        Name e.g. Stephen King Email Address e.g. stephenking@lorem.com Phone
-        Number e.g. +1 234 567 890 Next Step
-        {/* <!-- Step 1 end --> */}
-        {/* <!-- Step 2 start --> */}
-        Select your plan You have the option of monthly or yearly billing.
-        Arcade $9/mo Advanced $12/mo Pro $15/mo Monthly Yearly Go Back Next Step
-        {/* <!-- Step 2 end --> */}
-        {/* <!-- Step 3 start --> */}
-        Pick add-ons Add-ons help enhance your gaming experience. Online service
-        Access to multiplayer games +$1/mo Larger storage Extra 1TB of cloud
-        save +$2/mo Customizable Profile Custom theme on your profile +$2/mo Go
-        Back Next Step
-        {/* <!-- Step 3 end --> */}
-        {/* <!-- Step 4 start --> */}
-        Finishing up Double-check everything looks OK before confirming.
-        {/* <!-- Dynamically add subscription and add-on selections here --> */}
-        Total (per month/year) Go Back Confirm
-        {/* <!-- Step 4 end --> */}
-        {/* <!-- Step 5 start --> */}
-        Thank you! Thanks for confirming your subscription! We hope you have fun
-        using our platform. If you ever need support, please feel free to email
-        us at support@loremgaming.com.
-        {/* <!-- Step 5 end --> */}
-        <div className="attribution">
-          Challenge by{' '}
-          <a
-            href="https://www.frontendmentor.io?ref=challenge"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Frontend Mentor
-          </a>
-          . Coded by <a href="#">Your Name Here</a>.
-        </div>
-      </main>
+      <StepsProvider>
+        <PlansProvider>
+          <main className="flex flex-col justify-between md:justify-center items-center h-screen">
+            <div className="flex justify-center md:hidden h-[30%] w-full bg-sidebar_mobile bg-cover bg-no-repeat bg-center">
+              <SideBar />
+            </div>
+            <div className="flex absolute top-32 md:top-0 md:relative flex-col md:flex-row h-auto md:h-[70%] w-[90%] md:w-[52.5%] p-2 md:p-5 bg-neutral-white rounded-lg shadow-xl">
+              <div className="hidden md:flex w-1/4 p-5 rounded-lg shadow-xl bg-sidebar_desktop bg-cover bg-no-repeat bg-center">
+                <SideBar />
+              </div>
+
+              <div className="flex md:w-3/4">
+                <div className="flex flex-col justify-between w-full mt-2 md:mx-14">
+                  <div className="mx-4 h-full">
+                    <StepContent />
+                  </div>
+                  <div className="hidden md:flex w-full py-4">
+                    <BottomBar />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex md:hidden h-[10%] w-full">
+              <BottomBar />
+            </div>
+          </main>
+        </PlansProvider>
+      </StepsProvider>
     </>
   )
 }
