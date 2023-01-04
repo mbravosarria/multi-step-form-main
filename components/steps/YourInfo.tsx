@@ -40,18 +40,21 @@ function YourInfo() {
         </p>
         <div className="flex flex-col space-y-4">
           <AppInput
+            id="name"
             label="Name"
             placeholder="e.g. Stephen King"
             error={undefined}
             onChange={() => console.log('change')}
           />
           <AppInput
+            id="email"
             label="Email Address"
             placeholder="e.g. stephenking@lorem.com"
             error={emailError}
             onChange={validateEmail}
           />
           <AppInput
+            id="phone"
             label="Phone Number"
             placeholder="e.g. +1 234 567 890"
             error={phoneError}

@@ -25,7 +25,7 @@ export default function Home() {
       </Head>
       <StepsProvider>
         <PlansProvider>
-          <main className="flex flex-col justify-between md:justify-center items-center h-screen">
+          <div className="flex flex-col justify-between md:justify-center items-center h-screen">
             <div className="flex justify-center md:hidden h-[30%] w-full bg-sidebar_mobile bg-cover bg-no-repeat bg-center">
               <SideBar />
             </div>
@@ -48,7 +48,7 @@ export default function Home() {
             <div className="flex md:hidden h-[10%] w-full">
               <BottomBar />
             </div>
-          </main>
+          </div>
         </PlansProvider>
       </StepsProvider>
     </>

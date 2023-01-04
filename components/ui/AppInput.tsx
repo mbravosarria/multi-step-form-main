@@ -5,18 +5,19 @@ import React, {
 } from 'react'
 
 type Props = {
+  id: string
   label: string
   placeholder: string
   error?: string
   onChange: ChangeEventHandler
 }
 
-function AppInput({ label, placeholder, error, onChange }: Props) {
+function AppInput({ id, label, placeholder, error, onChange }: Props) {
   return (
     <>
       <div className="w-full">
         <div className="flex flex-row justify-between mb-1">
-          <label className="text-sm text-primary-marine_blue" htmlFor={label}>
+          <label className="text-sm text-primary-marine_blue" htmlFor={id}>
             {label}
           </label>
           {error && (
@@ -29,7 +30,7 @@ function AppInput({ label, placeholder, error, onChange }: Props) {
           }`}
           type="text"
           name={label}
-          id={label}
+          id={id}
           placeholder={placeholder}
           onChange={onChange}
         />
